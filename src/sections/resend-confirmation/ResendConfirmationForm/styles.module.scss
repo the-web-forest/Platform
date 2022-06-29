@@ -26,7 +26,7 @@
     margin-top: 10px;
   }
 
-  form {
+  .formContainer {
     @media (min-width: 1300px) {
       width: 70%;
     }
@@ -35,10 +35,14 @@
       width: 100%;
     }
 
-    display: flex;
-    flex-direction: column;
-    margin-top: 40px;
+    form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 40px;
+    }
   }
+
+
 
   .footerButtons {
     width: 100%;

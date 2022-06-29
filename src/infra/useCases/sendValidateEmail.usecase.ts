@@ -1,6 +1,6 @@
 import ApiURI from '../core/apiURI';
 import ApiErrors from '../errors/ApiErrors';
-import resetPasswordError from '../errors/ResetPasswordErrors';
+import validationEmailError from '../errors/ValidationEmailErrors';
 import { HttpService } from '../services/HTTP.service';
 import { IHTTPService } from '../services/interfaces/IHTTPService';
 
@@ -8,11 +8,11 @@ type Response = {
   send: boolean;
 };
 
-type Request = {
+type SendValidationDTO = {
   email: string;
 };
 
-export default class SendEmailToResetPasswordUseCase {
+export default class SendValidateEmailUseCase {
   private readonly httpService: IHTTPService;
 
   constructor() {
@@ -22,14 +22,14 @@ export default class SendEmailToResetPasswordUseCase {
   async run(email: string): Promise<boolean> {
     try {
       return (
-        await this.httpService.post<Request, Response>(
-          `${ApiURI.User.resetPassword}`,
+        await this.httpService.post<SendValidationDTO, Response>(
+          `${ApiURI.User.sendValidation}`,
           { email },
         )
       ).send;
     } catch (error: any) {
       const { data } = error.response;
-      throw new ApiErrors(resetPasswordError).getError(data.Code);
+      throw new ApiErrors(validationEmailError).getError(data.Code);
     }
   }
 }

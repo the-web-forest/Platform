@@ -74,12 +74,10 @@ export const LoginForm: FC = () => {
     <div className={styles.container}>
       <WebForestLogo />
       <div>
-        <div
-          className={styles.erroContainer}
-          style={{ opacity: statusError ? 1 : 0 }}
-        >
-          <AttentionMessage message="Ops.. E-mail ou senha incorreto!" />
-        </div>
+        <AttentionMessage
+          statusError={statusError}
+          message="Ops.. E-mail ou senha incorreto!"
+        />
         <form onSubmit={handleSubmit}>
           <Input
             name="email"
